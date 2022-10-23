@@ -109,16 +109,16 @@ func FormatBookAsTana(api *readwise.ReadwiseAPI, bookId int) (b []byte) {
 	}
 	highlights := api.GeHighlightsOfBook(bookId)
 
-	text = text + "[[" + book.Title + "]] #readwise-highlight\n"
-	text = text + " - type:: " + book.Category + "\n"
+	text = text + "- [[" + book.Title + "]] #readwise-highlight\n"
+	text = text + "  - type:: " + book.Category + "\n"
 	if strings.Contains(book.SourceUrl, "http") {
-		text = text + " - source:: " + book.SourceUrl + "\n"
+		text = text + "  - source:: " + book.SourceUrl + "\n"
 	}
 	if len(book.Author) > 0 {
-		text = text + " - author:: " + book.SourceUrl + "\n"
+		text = text + "  - author:: " + book.SourceUrl + "\n"
 	}
 	for _, h := range highlights {
-		text = text + " - " + h.Text + "\n"
+		text = text + "  - " + h.Text + "\n"
 	}
 	return TanaPaste(text)
 }
@@ -128,8 +128,8 @@ func FormatHighlightAsTana(api *readwise.ReadwiseAPI, h readwise.Highlight) (b [
 	if !found {
 		log.Print("Didn't find book", "id", h.BookId)
 	}
-	text := "[[" + book.Title + "]]\n" +
-		" - " + h.Text
+	text := "- [[" + book.Title + "]]\n" +
+		"  - " + h.Text + "\n"
 	return TanaPaste(text)
 }
 
