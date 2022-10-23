@@ -4,5 +4,5 @@ Website = "https://liberato.pt"
   Icon = "inbox.png"
   Name = "PKMInbox"
   ID = "pt.liberato.pkminbox"
-  Version = "1.0.0"
-  Build = 4
+  Version = "1.0.1"
+  Build = 7
