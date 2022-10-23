@@ -16,7 +16,7 @@ const (
 )
 
 type ReadwiseAPI struct {
-	token             string
+	Token             string
 	lastBookSync      time.Time
 	lastHighlightSync time.Time
 	Books             map[int]Book
@@ -72,7 +72,7 @@ type Highlight struct {
 
 func NewApi(token string) ReadwiseAPI {
 	var api ReadwiseAPI
-	api.token = token
+	api.Token = token
 	api.Books = make(map[int]Book)
 	return api
 }
@@ -106,7 +106,7 @@ func (api *ReadwiseAPI) getHighlights(update bool, max int, bookId int) []Highli
 	count := 0
 	for !done {
 		req, err := http.NewRequest("GET", next, nil)
-		req.Header.Add("Authorization", "token "+api.token)
+		req.Header.Add("Authorization", "token "+api.Token)
 
 		q := req.URL.Query()
 		q.Add("page_size", fmt.Sprint(pageSize))
@@ -153,11 +153,11 @@ func (api *ReadwiseAPI) GetBooks(update bool) {
 	// Fetch Request
 	done := false
 	next := "https://readwise.io/api/v2/books/"
-	api.lastBookSync = time.Now()
+	//	api.lastBookSync = time.Now()
 
 	for !done {
 		req, err := http.NewRequest("GET", next, nil)
-		req.Header.Add("Authorization", "token "+api.token)
+		req.Header.Add("Authorization", "token "+api.Token)
 		if update {
 			q := req.URL.Query()
 			q.Add("updated__gt", api.lastBookSync.Format(ReadwiseTimeFormat))
